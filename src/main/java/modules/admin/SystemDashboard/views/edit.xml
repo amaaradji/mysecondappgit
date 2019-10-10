@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<view title="System Dashboard" name="edit" xmlns="http://www.skyve.org/xml/view" xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<hbox>
+		<vbox border="true" borderTitle="System Activity">
+			<chart type="line">
+		        <model title="System Activity" 
+		        		label="Audits by time"
+		                moduleName="admin"
+		                documentName="Audit" 
+		                categoryBinding="timestamp" 
+		                valueBinding="bizId" 
+		                valueFunction="Count">
+		            <temporalBucket type="dayMonthYear" />
+		            <order by="category" sort="ascending" />
+		        </model>
+			</chart>
+		</vbox>
+		<vbox border="true" borderTitle="System Status">
+			<dataRepeater binding="status">
+				<boundColumn binding="memo1" title="Item" editable="false"/>
+				<boundColumn binding="boolean1" title="Status" editable="false"/>				
+			</dataRepeater>
+		</vbox>
+	</hbox>
+	<hbox border="true" borderTitle="Activity Breakdown">
+		<chart type="bar" >
+	          <model title="Activity By User" 
+	          		  label="Count of audits"
+	                  moduleName="admin"
+	                  documentName="Audit" 
+	                  categoryBinding="userName" 
+	                  valueBinding="bizId" 
+	                  valueFunction="Count">
+	                  <noBucket/>
+	              <top sort="ascending" top="10" by="category" includeOthers="true"/>
+	              <order by="category" sort="ascending" />
+	          </model>
+		</chart>
+		<chart type="pie" >
+	        <model title="Activity By Context"
+	        		label="Numbers of Audits"
+	                moduleName="admin"
+	                documentName="Audit" 
+	                categoryBinding="auditDocumentName" 
+	                valueBinding="bizId" 
+	                valueFunction="Count">
+	             <noBucket/>
+	             <top sort="ascending" top="10" by="category" includeOthers="true"/>
+	            <order by="category" sort="ascending" />
+	        </model>
+		</chart>
+	</hbox>
+	<vbox border="true" borderTitle="System Jobs">
+		<listGrid continueConversation="false" query="qDashboardJobs" disabled="true" />
+	</vbox>
+</view>

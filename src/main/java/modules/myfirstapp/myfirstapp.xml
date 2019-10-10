@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="Myfirstapp" prototype="true" name="myfirstapp" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+    <homeRef>list</homeRef>
+    <homeDocument>Eventdoc</homeDocument>
+    <documents>
+        <document ref="Eventdoc"/>
+    </documents>
+    <roles>
+        <role name="Viewer">
+            <description><![CDATA[Enough privileges to view Myfirstapp documents.]]></description>
+            <privileges>
+                <document name="Eventdoc" permission="_R__C"/>
+            </privileges>
+        </role>
+        <role name="Maintainer">
+            <description><![CDATA[Enough privileges to create and edit Myfirstapp documents.]]></description>
+            <privileges>
+                <document name="Eventdoc" permission="CRUDC"/>
+            </privileges>
+        </role>
+    </roles>
+    <menu>
+        <list document="Eventdoc" name="eventdocs">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+    </menu>
+</module>
