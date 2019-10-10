@@ -1,5 +1,6 @@
 package modules.myfirstapp.domain;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -10,11 +11,13 @@ import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.domain.types.DateOnly;
 import org.skyve.impl.domain.AbstractPersistentBean;
+import org.skyve.impl.domain.ChangeTrackingArrayList;
 import org.skyve.impl.domain.types.jaxb.DateOnlyMapper;
 
 /**
  * Eventdoc
  * 
+ * @navcomposed 1 billets 0..n Billet
  * @stereotype "persistent"
  */
 @XmlType
@@ -41,6 +44,10 @@ public class Eventdoc extends AbstractPersistentBean {
 	public static final String descriptionPropertyName = "description";
 	/** @hidden */
 	public static final String imagePropertyName = "image";
+	/** @hidden */
+	public static final String billetsPropertyName = "billets";
+	/** @hidden */
+	public static final String feuilleDeRoutePropertyName = "feuilleDeRoute";
 
 	/**
 	 * Nom de l’événement
@@ -62,6 +69,14 @@ public class Eventdoc extends AbstractPersistentBean {
 	 * Image
 	 **/
 	private String image;
+	/**
+	 * Billets
+	 **/
+	private List<Billet> billets = new ChangeTrackingArrayList<>("billets", this);
+	/**
+	 * Feuille de route
+	 **/
+	private String feuilleDeRoute;
 
 	@Override
 	@XmlTransient
@@ -198,5 +213,50 @@ public class Eventdoc extends AbstractPersistentBean {
 	public void setImage(String image) {
 		preset(imagePropertyName, image);
 		this.image = image;
+	}
+
+	/**
+	 * {@link #billets} accessor.
+	 * @return	The value.
+	 **/
+	@XmlElement
+	public List<Billet> getBillets() {
+		return billets;
+	}
+
+	/**
+	 * {@link #billets} accessor.
+	 * @param bizId	The bizId of the element in the list.
+	 * @return	The value of the element in the list.
+	 **/
+	public Billet getBilletsElementById(String bizId) {
+		return getElementById(billets, bizId);
+	}
+
+	/**
+	 * {@link #billets} mutator.
+	 * @param bizId	The bizId of the element in the list.
+	 * @param element	The new value of the element in the list.
+	 **/
+	public void setBilletsElementById(String bizId, Billet element) {
+		 setElementById(billets, element);
+	}
+
+	/**
+	 * {@link #feuilleDeRoute} accessor.
+	 * @return	The value.
+	 **/
+	public String getFeuilleDeRoute() {
+		return feuilleDeRoute;
+	}
+
+	/**
+	 * {@link #feuilleDeRoute} mutator.
+	 * @param feuilleDeRoute	The new value.
+	 **/
+	@XmlElement
+	public void setFeuilleDeRoute(String feuilleDeRoute) {
+		preset(feuilleDeRoutePropertyName, feuilleDeRoute);
+		this.feuilleDeRoute = feuilleDeRoute;
 	}
 }

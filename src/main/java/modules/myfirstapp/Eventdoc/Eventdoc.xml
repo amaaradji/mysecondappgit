@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://www.skyve.org/xml/document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Eventdoc" xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
-    <persistent name="MYF_eventdoc"/>
+    <persistent name="MYF_Eventdoc"/>
     <singularAlias>Eventdoc</singularAlias>
     <pluralAlias>eventdocs</pluralAlias>
     <bizKey expression="Eventdoc - {nomDeLévénement}"/>
@@ -20,6 +20,15 @@
         </memo>
         <content name="image">
             <displayName>Image</displayName>
+        </content>
+        <collection type="child" name="billets">
+            <displayName>Billets</displayName>
+            <documentName>Billet</documentName>
+            <minCardinality>0</minCardinality>
+            <ordering/>
+        </collection>
+        <content name="feuilleDeRoute">
+            <displayName>Feuille de route</displayName>
         </content>
     </attributes>
 </document>

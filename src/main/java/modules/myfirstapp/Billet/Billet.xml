@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.skyve.org/xml/document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Billet" xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+    <persistent name="MYF_Billet"/>
+    <singularAlias>Billet</singularAlias>
+    <pluralAlias>Billets</pluralAlias>
+    <bizKey expression="Billet - {billetPdf}"/>
+    <attributes>
+        <text name="nomBillet">
+            <displayName>NomBillet</displayName>
+            <length>30</length>
+        </text>
+        <content name="billetPdf">
+            <displayName>BilletPdf</displayName>
+        </content>
+    </attributes>
+</document>

@@ -11,7 +11,42 @@
 	<typedef name="TimeOnly" class="org.skyve.impl.domain.types.TimeOnlyUserType" />
 	<typedef name="Timestamp" class="org.skyve.impl.domain.types.TimestampUserType" />
 	<typedef name="Enum" class="org.skyve.impl.domain.types.EnumUserType" />
-	<class name="modules.myfirstapp.domain.Eventdoc" table="MYF_eventdoc" entity-name="myfirstappEventdoc">
+	<class name="modules.myfirstapp.domain.Billet" table="MYF_Billet" entity-name="myfirstappBillet">
+		<id name="bizId" length="36" />
+		<version name="bizVersion" unsaved-value="null" />
+		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
+		<property name="bizKey" length="1024" not-null="true" />
+		<property name="bizCustomer" length="50" not-null="true" />
+		<property name="bizFlagComment" length="1024" />
+		<property name="bizDataGroupId" length="36" />
+		<property name="bizUserId" length="36" not-null="true" />
+		<property name="nomBillet" length="30" />
+		<property name="billetPdf" length="36" />
+		<filter name="myfirstappBilletNoneFilter" condition="1=0"/>
+		<filter name="myfirstappBilletCustomerFilter" condition="bizCustomer=:customerParam"/>
+		<filter name="myfirstappBilletDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
+		<filter name="myfirstappBilletUserIdFilter" condition="bizUserId=:userIdParam"/>
+	</class>
+
+	<class name="modules.myfirstapp.domain.Chambre" table="MYF_Chambre" entity-name="myfirstappChambre">
+		<id name="bizId" length="36" />
+		<version name="bizVersion" unsaved-value="null" />
+		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
+		<property name="bizKey" length="1024" not-null="true" />
+		<property name="bizCustomer" length="50" not-null="true" />
+		<property name="bizFlagComment" length="1024" />
+		<property name="bizDataGroupId" length="36" />
+		<property name="bizUserId" length="36" not-null="true" />
+		<property name="nom" length="50" />
+		<property name="capacité" />
+		<property name="plan" length="36" />
+		<filter name="myfirstappChambreNoneFilter" condition="1=0"/>
+		<filter name="myfirstappChambreCustomerFilter" condition="bizCustomer=:customerParam"/>
+		<filter name="myfirstappChambreDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
+		<filter name="myfirstappChambreUserIdFilter" condition="bizUserId=:userIdParam"/>
+	</class>
+
+	<class name="modules.myfirstapp.domain.Eventdoc" table="MYF_Eventdoc" entity-name="myfirstappEventdoc">
 		<id name="bizId" length="36" />
 		<version name="bizVersion" unsaved-value="null" />
 		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
@@ -25,12 +60,37 @@
 		<property name="dateFin" type="DateOnly" />
 		<property name="description" type="text" />
 		<property name="image" length="36" />
+		<bag name="billets" cascade="all-delete-orphan">
+			<key column="parent_id" />
+			<one-to-many entity-name="myfirstappBillet" />
+		</bag>
+		<property name="feuilleDeRoute" length="36" />
 		<filter name="myfirstappEventdocNoneFilter" condition="1=0"/>
 		<filter name="myfirstappEventdocCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="myfirstappEventdocDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
 		<filter name="myfirstappEventdocUserIdFilter" condition="bizUserId=:userIdParam"/>
 	</class>
 
+	<filter-def name="myfirstappBilletNoneFilter" />
+	<filter-def name="myfirstappBilletCustomerFilter">
+		<filter-param name="customerParam" type="string"/>
+	</filter-def>
+	<filter-def name="myfirstappBilletDataGroupIdFilter">
+		<filter-param name="dataGroupIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="myfirstappBilletUserIdFilter">
+		<filter-param name="userIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="myfirstappChambreNoneFilter" />
+	<filter-def name="myfirstappChambreCustomerFilter">
+		<filter-param name="customerParam" type="string"/>
+	</filter-def>
+	<filter-def name="myfirstappChambreDataGroupIdFilter">
+		<filter-param name="dataGroupIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="myfirstappChambreUserIdFilter">
+		<filter-param name="userIdParam" type="string"/>
+	</filter-def>
 	<filter-def name="myfirstappEventdocNoneFilter" />
 	<filter-def name="myfirstappEventdocCustomerFilter">
 		<filter-param name="customerParam" type="string"/>

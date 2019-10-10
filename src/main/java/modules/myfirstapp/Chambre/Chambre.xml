@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.skyve.org/xml/document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Chambre" xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+    <persistent name="MYF_Chambre"/>
+    <singularAlias>Chambre</singularAlias>
+    <pluralAlias>chambres</pluralAlias>
+    <bizKey expression="Chambre - {nom}"/>
+    <attributes>
+        <text name="nom">
+            <displayName>nom</displayName>
+            <length>50</length>
+        </text>
+        <integer name="capacité">
+            <displayName>Capacité</displayName>
+        </integer>
+        <content name="plan">
+            <displayName>Plan</displayName>
+        </content>
+    </attributes>
+</document>
